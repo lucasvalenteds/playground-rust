@@ -1,3 +1,4 @@
 [workspace]
 members = [
+    "modules/serde-rs_json"
 ]
