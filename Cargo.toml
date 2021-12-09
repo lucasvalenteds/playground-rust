@@ -1,4 +1,5 @@
 [workspace]
 members = [
-    "modules/serde-rs_json"
+    "modules/serde-rs_json",
+    "modules/seladb_pickledb-rs"
 ]
