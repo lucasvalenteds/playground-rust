@@ -59,7 +59,7 @@ mod tests {
     use super::{Event, GameNight};
 
     #[test]
-    fn can_invitation_a_guest_to_event() {
+    fn can_invite_a_guest_to_event() {
         // Arrange
         let game_night = GameNight::new();
         assert_eq!(0, game_night.invitations_list().len());
@@ -79,7 +79,7 @@ mod tests {
     }
 
     #[test]
-    fn cannot_invitation_the_same_guest_twice() {
+    fn cannot_invite_the_same_guest_twice() {
         // Arrange
         let game_night = GameNight::new();
         assert_eq!(0, game_night.invitations_list().len());
