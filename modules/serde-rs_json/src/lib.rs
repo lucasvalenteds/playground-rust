@@ -8,11 +8,25 @@ pub struct Device {
     pub owner: Option<String>,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+pub struct Book {
+    #[serde(rename = "authors", default)]
+    pub authors: Vec<String>,
+}
+
 #[cfg(test)]
 mod tests {
 
-    use super::Device;
+    use super::{Book,Device};
     use serde_json as Serde;
+
+    #[test]
+    fn vector_deserialization_defaults_to_empty_vec() {
+        let serialized = String::from("{}");
+        let deserialized: Book = Serde::from_str(&serialized).unwrap();
+
+        assert_eq!(Vec::<String>::new(), deserialized.authors)
+    }
 
     #[test]
     fn serializing_and_deserializing_vector() {
