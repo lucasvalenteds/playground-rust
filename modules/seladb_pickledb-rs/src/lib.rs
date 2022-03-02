@@ -56,4 +56,32 @@ mod tests {
         // Tear down
         FileSystem::remove_file(filename.as_ref()).unwrap();
     }
+
+    #[test]
+    fn rewriting_key() {
+        // Setup
+        let filename = Box::new(format!("{}/example3.db", env!("XDG_RUNTIME_DIR")));
+        let mut database = PickleDb::new(
+            filename.as_ref(),
+            PickleDbDumpPolicy::AutoDump,
+            SerializationMethod::Json,
+        );
+
+        // Arrange
+        let key = "name";
+        let (value1, value2) = ("John Smith", "Mary Jane");
+
+        // Act
+        database.set(&key, &value1).unwrap();
+        database.set(&key, &value2).unwrap();
+        let name = database.get::<String>(&key).unwrap();
+
+        // Assert
+        assert_ne!(value1, value2);
+        assert_eq!(value2, name);
+        assert_eq!(true, database.exists(&key));
+
+        // Tear down
+        FileSystem::remove_file(filename.as_ref()).unwrap();
+    }
 }
